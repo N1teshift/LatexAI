@@ -1,0 +1,122 @@
+% Document type configurations
+% This file defines different document types and their settings
+
+% ===== PRESENTATION SETTINGS =====
+\newcommand{\setupPresentation}{
+    \documentclass[aspectratio=169,10pt]{beamer}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[lithuanian]{babel}
+    \usepackage{amsmath,amssymb,mathtools}
+    \usepackage{graphicx}
+    \usepackage{tikz}
+    \usepackage{pgfplots}
+    \usepackage{tabularx,array,multicol,multirow,xcolor}
+    \usepackage{enumitem}
+    \usepackage{hyperref}
+    \pgfplotsset{compat=1.18}
+    \usetikzlibrary{calc,arrows.meta,angles,quotes,intersections,decorations.pathmorphing}
+    \graphicspath{{content/images/}}
+    
+    % Lists & minor defaults
+    \setlist[itemize]{leftmargin=1.2em,itemsep=0.25em}
+    \setlist[enumerate]{leftmargin=1.4em,itemsep=0.25em}
+    \setbeamertemplate{navigation symbols}{}
+}
+
+% ===== MATH THEORY & WORKSHEETS SETTINGS =====
+\newcommand{\setupMathTheory}{
+    \documentclass[8pt,a4paper]{report}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[lithuanian]{babel}
+    \usepackage{amssymb, amsmath, amsthm}
+    \usepackage{lmodern}
+    \usepackage{textgreek}
+    \usepackage[top=0.25cm, bottom=0.25cm, left=0.25cm, right=0.25cm, footskip=1cm, a4paper]{geometry}
+    \usepackage{fncychap}
+    \usepackage{fancyhdr}
+    \usepackage{graphicx}
+    \usepackage{tabularx}
+    \usepackage{array}
+    \usepackage{tikz}
+    \usepackage{multicol}
+    \usepackage{multirow}
+    \usepackage{xcolor}
+    \usepackage{pgfplots}
+    \usepackage{hyperref}
+    \usepackage{enumitem}
+    
+    \usetikzlibrary{angles,quotes,calc}
+    \usetikzlibrary{calc, decorations.pathmorphing}
+    \usetikzlibrary{intersections}
+    \usetikzlibrary{arrows.meta}
+    \usetikzlibrary{arrows}
+    
+    \def\RPlus{\rule[0.165em]{.5em}{.165em}\hspace{-.33em}\rule[0em]{.165em}{.5em}\,}
+    \graphicspath{ {content/images/} }
+    
+    \makeatletter
+    \renewcommand{\DOCH}{%                                     
+        \CNoV\thechapter \space \CNV\FmN{\@chapapp} \par\nobreak
+        \vskip 40\p@}
+    \makeatother
+    
+    \renewcommand*{\proofname}{$\bigtriangleup$}
+    \linespread{1.5}
+    \numberwithin{table}{chapter}
+    \numberwithin{figure}{chapter}
+    \pagestyle{plain}
+    
+    \newtheorem{teorema}{teorema}
+    \newtheorem{teorema1}{teorema}
+    \theoremstyle{definition}
+    \newtheorem{uzd}[teorema]{uždavinys}
+    \newtheorem{puzd}[teorema]{papildomas uždavinys}
+    \newtheorem{ap}[teorema]{apibrėžimas}
+    \newtheorem{teig}[teorema]{teiginys}
+    \newtheorem{pas}[teorema]{pastaba}
+    \newtheorem{pav}[teorema]{pavyzdys}
+    \newtheorem{sav}[teorema]{savybė}
+    
+    \def\R{\mathbb{R}}
+    \def\N{\mathbb{N}}
+    \def\Q{\mathbb{Q}}
+    \def\Z{\mathbb{Z}}
+    \def\I{\mathbb{I}}
+    
+    \newcommand{\lk}[1]{\glqq #1\grqq\,}
+    
+    \pgfmathdeclarefunction{cbrt}{1}{%
+      \pgfmathparse{#1>=0 ? (#1)^(1/3) : -((abs(#1))^(1/3))}%
+    }
+}
+
+% ===== ARTICLE SETTINGS =====
+\newcommand{\setupArticle}{
+    \documentclass[11pt,a4paper]{article}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    \usepackage[lithuanian]{babel}
+    \usepackage{amsmath,amssymb,mathtools}
+    \usepackage{graphicx}
+    \usepackage{tikz}
+    \usepackage{pgfplots}
+    \usepackage{tabularx,array,multicol,multirow,xcolor}
+    \usepackage{enumitem}
+    \usepackage{hyperref}
+    \usepackage[margin=2.5cm]{geometry}
+    
+    \pgfplotsset{compat=1.18}
+    \usetikzlibrary{calc,arrows.meta,angles,quotes,intersections,decorations.pathmorphing}
+    \graphicspath{{content/images/}}
+    
+    % Common math definitions
+    \def\R{\mathbb{R}}
+    \def\N{\mathbb{N}}
+    \def\Q{\mathbb{Q}}
+    \def\Z{\mathbb{Z}}
+    \def\I{\mathbb{I}}
+    
+    \newcommand{\lk}[1]{\glqq #1\grqq\,}
+}

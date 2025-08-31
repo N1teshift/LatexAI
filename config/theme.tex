@@ -1,0 +1,101 @@
+% ---- Metropolis theme + brand colors ----
+\usetheme{metropolis}
+\metroset{numbering=fraction,progressbar=frametitle}
+
+\setbeamercolor{normal text}{fg=KMMBlueDark}
+\setbeamercolor{frametitle}{fg=KMMBlueDark}
+\setbeamercolor{structure}{fg=KMMBlue}
+\setbeamercolor{alerted text}{fg=KMMBlue}
+\setbeamercolor{progress bar}{fg=KMMBlue,bg=KMMGold!40}
+\setbeamercolor{background canvas}{bg=white}
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% -------- Fonts (pdfLaTeX safe) --------
+\usepackage{cmbright}   % clean scientific sans-serif
+%\usepackage{helvet}    % Helvetica look
+%\usepackage{mathptmx}  % Times-like look
+
+% ---- persistent footer bar ----
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3.2ex,dp=0.8ex]{}
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[KMMBlue] (0,0) rectangle (\paperwidth,3.2ex);
+      % LEFT footer text → author
+      \node[anchor=west,white,font=\scriptsize] at (1em,1.6ex) {\insertauthor};
+      % RIGHT page counter
+      \node[anchor=east,white,font=\scriptsize] at (\paperwidth-1.2em,1.6ex)
+        {\insertframenumber/\inserttotalframenumber};
+      \fill[KMMGold] (\paperwidth,0) rectangle (\paperwidth-1.2em,3.2ex);
+    \end{tikzpicture}
+    \vspace*{3.2ex}
+  \end{beamercolorbox}%
+}
+
+% --- helper: set logo size/offset depending on subtitle presence
+\newcommand{\KMMLogoHeight}{0.9cm}
+\newcommand{\KMMLogoX}{-0.6em}
+\newcommand{\KMMLogoY}{-0.6em}
+\newcommand{\KMMCornerAdjust}{%
+  % empty-subtitle check (robust)
+  \if\relax\detokenize{\insertframesubtitle}\relax
+    \renewcommand{\KMMLogoHeight}{0.75cm}% thinner header → slightly smaller logo
+    \renewcommand{\KMMLogoY}{-0.25em}% nudge closer to the top
+  \else
+    \renewcommand{\KMMLogoHeight}{0.9cm}% normal two-line header
+    \renewcommand{\KMMLogoY}{-0.6em}%
+  \fi
+}
+
+% ---- frametitle with corner logo that adapts to header height
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,dp=0.8ex,left]{frametitle}
+    \hspace*{0.6em}\insertframetitle%
+    \if\relax\detokenize{\insertframesubtitle}\relax\relax
+    \else\\[-0.2ex]
+      {\normalsize\color{KMMGrey}\hspace*{0.6em}\insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+  % compute offsets/sizes first (outside TikZ)
+  \KMMCornerAdjust
+  % place logo pinned to page top-right with the computed values
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east] at ($(current page.north east)+(\KMMLogoX,\KMMLogoY)$) {%
+      \IfFileExists{\KMMCornerLogo}{\includegraphics[height=\KMMLogoHeight]{\KMMCornerLogo}}{}%
+    };
+  \end{tikzpicture}%
+}
+
+
+% -- Elegant theorem boxes for Beamer
+\usepackage[most]{tcolorbox}
+
+% Definition box styled to your palette
+
+% Unnumbered Apibrėžimas box (fixed title only)
+\newtcolorbox{ApBox}[1][]{%
+  enhanced, breakable,
+  colback=KMMBlue!4, colframe=KMMBlue, coltitle=white,
+  fonttitle=\bfseries, title filled, sharp corners,
+  attach boxed title to top left={xshift=0.6em, yshift*=-\tcboxedtitleheight/2},
+  boxed title style={colback=KMMBlue, colframe=KMMBlue, sharp corners},
+  left=1em, right=1em, top=0.8em, bottom=0.8em,
+  before skip=6pt, after skip=6pt,
+  title={Apibrėžimas}, % <- always fixed text
+  #1 % <- allows optional extra options like width
+}
+
+% Example box styled to your palette
+\newtcolorbox{PavBox}[1][]{%
+  enhanced, breakable,
+  colback=KMMGold!4, colframe=KMMGold, coltitle=white,
+  fonttitle=\bfseries, title filled, sharp corners,
+  attach boxed title to top left={xshift=0.6em, yshift*=-\tcboxedtitleheight/2},
+  boxed title style={colback=KMMGold, colframe=KMMGold, sharp corners},
+  left=1em, right=1em, top=0.8em, bottom=0.8em,
+  before skip=6pt, after skip=6pt,
+  title={Pavyzdys}, % <- always fixed text
+  #1 % <- allows optional extra options like width
+}

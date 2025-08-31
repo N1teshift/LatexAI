@@ -1,0 +1,20 @@
+% ---- theorem-like environments (LT) ----
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+\newtheorem{teig}{Teiginys}
+\theoremstyle{definition}
+\newtheorem{ap}{Apibrėžimas}
+\newtheorem{pav}{Pavyzdys}
+\newtheorem{uzd}{Uždavinys}
+\newtheorem{puzd}{Papildomas uždavinys}
+\theoremstyle{remark}
+\newtheorem{pas}{Pastaba}
+
+% ---- math helpers ----
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\lk}[1]{\glqq #1\grqq{}}
+\pgfmathdeclarefunction{cbrt}{1}{\pgfmathparse{#1>=0 ? (#1)^(1/3) : -((abs(#1))^(1/3))}}

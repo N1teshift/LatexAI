@@ -1,0 +1,37 @@
+% ---- custom title slide like the KMM sample (centered logo) ----
+\newcommand{\KMMTitlePage}{%
+\begin{frame}[plain]
+% Left half blue + date + author
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[KMMBlue] (current page.north west)
+    rectangle ($(current page.south west)!0.5!(current page.south east)$);
+  \node[anchor=south west,white,font=\small]
+    at ($(current page.south west)+(0.8em,0.8em)$) {\insertdate\ \textbullet\ \insertauthor};
+\end{tikzpicture}
+
+\begin{columns}[onlytextwidth,totalwidth=\paperwidth]
+% LEFT: title text on blue
+\begin{column}{0.5\paperwidth}
+\vspace*{4.5em}
+{\color{white}\LARGE\bfseries \inserttitle\par}
+\vspace{0.6em}
+{\color{white}\large \insertsubtitle\par}
+\end{column}
+
+% RIGHT: perfectly centered logo + thin line at bottom
+\begin{column}{0.5\paperwidth}
+\vspace*{1em}
+\vfill
+% horizontally center across the full column width
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=center] 
+at ($(current page.north east)+(-4cm,-4.5cm)$) {%
+\includegraphics[width=0.5\paperwidth]{\KMMTitleLogo}%
+};
+\end{tikzpicture}
+\vfill
+% (optional IB badges here)
+\end{column}
+\end{columns}
+\end{frame}%
+}

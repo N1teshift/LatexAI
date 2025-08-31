@@ -1,0 +1,188 @@
+% Beamer Presentation Template for AI Agentic LaTeX Development
+% This template is optimized for AI assistance and includes common packages
+
+\documentclass[aspectratio=169]{beamer}
+
+% Essential packages for beamer presentations
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{enumitem}
+\usepackage{animate}
+\usepackage{multimedia}
+
+% Beamer theme and color configuration
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% Custom colors for AI assistance
+\definecolor{aiBlue}{RGB}{0,114,178}
+\definecolor{aiGreen}{RGB}{0,158,115}
+\definecolor{aiRed}{RGB}{213,94,0}
+
+% Code listing configuration
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{aiBlue},
+    commentstyle=\color{aiGreen},
+    stringstyle=\color{aiRed},
+    backgroundcolor=\color{gray!10}
+}
+
+% Custom commands for AI assistance
+\newcommand{\ai}[1]{\textcolor{aiBlue}{\textbf{[AI: #1]}}}
+\newcommand{\todo}[1]{\textcolor{aiRed}{\textbf{[TODO: #1]}}}
+\newcommand{\note}[1]{\textcolor{aiGreen}{\textbf{[NOTE: #1]}}}
+
+% Presentation information
+\title{Your Presentation Title}
+\subtitle{Subtitle or Additional Information}
+\author{Your Name}
+\institute{Your Institution}
+\date{\today}
+
+\begin{document}
+
+% Title frame
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
+% Introduction section
+\section{Introduction}
+\begin{frame}{Introduction}
+    \begin{itemize}
+        \item<1-> First point
+        \item<2-> Second point
+        \item<3-> Third point
+    \end{itemize}
+    
+    \note{AI can help you structure your presentation content effectively}
+\end{frame}
+
+% Background section
+\section{Background}
+\begin{frame}{Background}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item Background information
+                \item Previous work
+                \item Context
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            % Placeholder for figure
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{../assets/placeholder.png}
+                \caption{Figure caption}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Methodology section
+\section{Methodology}
+\begin{frame}{Methodology}
+    \begin{enumerate}
+        \item<1-> Step 1: Description
+        \item<2-> Step 2: Description
+        \item<3-> Step 3: Description
+    \end{enumerate}
+    
+    \begin{block}{Key Insight}
+        Important methodological insight or note.
+    \end{block}
+\end{frame}
+
+% Results section
+\section{Results}
+\begin{frame}{Results}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Result 1
+                \item Result 2
+                \item Result 3
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            % Placeholder for table
+            \begin{table}
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Column 1 & Column 2 \\
+                    \hline
+                    Data 1 & Data 2 \\
+                    \hline
+                \end{tabular}
+                \caption{Results table}
+            \end{table}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Discussion section
+\section{Discussion}
+\begin{frame}{Discussion}
+    \begin{itemize}
+        \item<1-> Interpretation of results
+        \item<2-> Implications
+        \item<3-> Future work
+    \end{itemize}
+    
+    \begin{alertblock}{Important Note}
+        Key takeaway or important point to emphasize.
+    \end{alertblock}
+\end{frame}
+
+% Conclusion section
+\section{Conclusion}
+\begin{frame}{Conclusion}
+    \begin{itemize}
+        \item Summary of main findings
+        \item Contributions
+        \item Future directions
+    \end{itemize}
+    
+    \vspace{1cm}
+    \centering
+    \Large Thank you for your attention!
+    
+    \vspace{0.5cm}
+    \normalsize Questions?
+\end{frame}
+
+% References frame (if needed)
+\begin{frame}[allowframebreaks]{References}
+    \bibliographystyle{plain}
+    \bibliography{../bibliography/references}
+\end{frame}
+
+\end{document}
