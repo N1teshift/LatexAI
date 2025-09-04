@@ -25,54 +25,42 @@ LaTeX/
 │       ├── main.tex         # 4-line main file
 │       ├── settings.tex     # Project-specific settings
 │       └── content.tex      # Project content
-├── templates/                # Starting templates for new projects
-│   ├── presentation.tex     # Beamer presentation template
-│   ├── document.tex         # Regular document template
-│   ├── settings-presentation.tex  # Presentation settings template
-│   ├── settings-document.tex      # Document settings template
-│   └── new-document.tex     # Generic document template
+├── template_document/        # Template for new document projects
+│   ├── main.tex             # Document main template
+│   ├── settings.tex         # Document settings template
+│   └── content.tex          # Document content template
+├── template_presentation/    # Template for new presentation projects
+│   ├── main.tex             # Presentation main template
+│   ├── settings.tex         # Presentation settings template
+│   └── content.tex          # Presentation content template
 ├── build/                    # Build output directory
-├── build-pre-ivadas.bat     # Build presentation project
-├── build-doc-irrational.bat # Build math theory project
-├── build-all.bat            # Universal build script
 └── README.md                # This file
 ```
 
-## Projects
 
-### 1. Presentation (pre_ivadas)
-- **Location**: `projects/pre_ivadas/`
-- **Build**: `build-pre-ivadas.bat`
-- **Output**: `pre_ivadas.pdf`
-- **Type**: Beamer presentation
-
-### 2. Math Theory (doc_irrational)
-- **Location**: `projects/doc_irrational/`
-- **Build**: `build-doc-irrational.bat`
-- **Output**: `doc_irrational.pdf`
-- **Type**: Report with math theory content
-
-## Building Documents
-
-### Quick Build
-- **Presentation**: Run `build-pre-ivadas.bat`
-- **Math Theory**: Run `build-doc-irrational.bat`
-- **All Documents**: Run `build-all.bat`
-
-### Universal Builder
-Run `build-all.bat` and choose:
-1. Presentation (pre_ivadas)
-2. Math Theory (doc_irrational)
-3. Build all documents
 
 ## Creating New Projects
 
-1. **Create a new project folder** in `projects/`
+### For New Documents (Math Theory, Worksheets, etc.)
+1. **Create a new project folder** in `projects/` (e.g., `projects/my_new_document/`)
 2. **Copy template files**:
-   - Copy `templates/new-document.tex` to `projects/your-project/main.tex`
-   - Copy appropriate settings template to `projects/your-project/settings.tex`
-   - Create `projects/your-project/content.tex`
-3. **Create a build script** or use existing ones as templates
+   ```bash
+   cp -r template_document/* projects/my_new_document/
+   ```
+3. **Customize the files**:
+   - Edit `settings.tex` if you need different packages or settings
+   - Replace `content.tex` with your actual content
+
+### For New Presentations
+1. **Create a new project folder** in `projects/` (e.g., `projects/my_new_presentation/`)
+2. **Copy template files**:
+   ```bash
+   cp -r template_presentation/* projects/my_new_presentation/
+   ```
+3. **Customize the files**:
+   - Edit `main.tex` to change title, author, date
+   - Edit `settings.tex` if you need different packages or settings
+   - Replace `content.tex` with your actual presentation slides
 
 ## Project Structure
 
@@ -83,6 +71,27 @@ projects/your-project/
 ├── settings.tex  # Project-specific settings and configuration
 └── content.tex   # Main content of the document
 ```
+
+## Template Features
+
+### Document Template (`template_document/`)
+- **Document Class**: `report` with A4 paper
+- **Features**: 
+  - Math theorem environments (`teorema`, `uzd`, `ap`, etc.)
+  - Multi-column layout with smart column rules
+  - Smart text boxes that break lines without breaking math
+  - Lithuanian language support
+  - Custom chapter styling
+
+### Presentation Template (`template_presentation/`)
+- **Document Class**: `beamer` with 16:9 aspect ratio
+- **Features**:
+  - KMM branding and color scheme
+  - Metropolis theme
+  - Custom title slide with logo
+  - Corner logo on frame titles
+  - Persistent footer with author and page numbers
+  - Theorem boxes styled to brand colors
 
 ## Configuration Files
 
@@ -98,18 +107,11 @@ projects/your-project/
 
 - **`content/images/`**: All images and graphics (shared across projects)
 - **`config/`**: Global configuration files (shared across projects)
-- **`templates/`**: Starting templates for new projects
-
-## Tips
-
-1. **Modular Design**: Each project is self-contained but shares common resources
-2. **Shared Resources**: Images and configurations are shared across all projects
-3. **Easy Extension**: Add new projects by following the template pattern
-4. **Clean Builds**: All build artifacts go to the `build/` directory
-5. **Simple Main Files**: Always just 4 lines for easy maintenance
+- **`template_document/`**: Template for new document projects
+- **`template_presentation/`**: Template for new presentation projects
 
 ## Requirements
 
 - TeX Live 2025 (or compatible LaTeX distribution)
-- Windows PowerShell (for build scripts)
+- VS Code with LaTeX Workshop extension
 - All required LaTeX packages (automatically included in document type configurations)

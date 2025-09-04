@@ -1,0 +1,189 @@
+% Presentation Settings
+\documentclass[aspectratio=169,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[lithuanian]{babel}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tabularx,array,multicol,multirow,xcolor}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{calc,arrows.meta,angles,quotes,intersections,decorations.pathmorphing}
+\graphicspath{{../../content/images/}{content/images/}}
+
+% Lists & minor defaults
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.25em}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=0.25em}
+\setbeamertemplate{navigation symbols}{}
+
+% ---- KMM color palette ----
+\definecolor{KMMBlue}{HTML}{1F5C7A}
+\definecolor{KMMGold}{HTML}{D5BC95}
+\definecolor{KMMGoldLight}{HTML}{FBE2C3}
+\definecolor{KMMGoldMedium}{HTML}{D7BC8C}
+\definecolor{KMMGoldDark}{HTML}{B5825C}
+\definecolor{KMMBlueDark}{HTML}{153E52}
+\definecolor{KMMGrey}{HTML}{6B7280}
+
+% ---- paths to logos ----
+\newcommand{\KMMTitleLogo}{../../content/images/kmm_logo.png}
+\newcommand{\KMMCornerLogo}{../../content/images/kmm_logo_small.png}
+
+% ---- feature toggles ----
+\newif\ifKMMCornerLogoOn
+\KMMCornerLogoOntrue
+
+% ---- Metropolis theme + brand colors ----
+\usetheme{metropolis}
+\metroset{numbering=fraction,progressbar=frametitle}
+
+\setbeamercolor{normal text}{fg=KMMBlueDark}
+\setbeamercolor{frametitle}{fg=KMMBlueDark}
+\setbeamercolor{structure}{fg=KMMBlue}
+\setbeamercolor{alerted text}{fg=KMMBlue}
+\setbeamercolor{progress bar}{fg=KMMBlue,bg=KMMGold!40}
+\setbeamercolor{background canvas}{bg=white}
+
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% -------- Fonts (pdfLaTeX safe) --------
+\usepackage{cmbright}
+
+% ---- persistent footer bar ----
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3.2ex,dp=0.8ex]{}
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[KMMBlue] (0,0) rectangle (\paperwidth,3.2ex);
+      \node[anchor=west,white,font=\scriptsize] at (1em,1.6ex) {\insertauthor};
+      \node[anchor=east,white,font=\scriptsize] at (\paperwidth-1.2em,1.6ex)
+        {\insertframenumber/\inserttotalframenumber};
+      \fill[KMMGold] (\paperwidth,0) rectangle (\paperwidth-1.2em,3.2ex);
+    \end{tikzpicture}
+    \vspace*{3.2ex}
+  \end{beamercolorbox}%
+}
+
+% --- helper: set logo size/offset depending on subtitle presence
+\newcommand{\KMMLogoHeight}{0.9cm}
+\newcommand{\KMMLogoX}{-0.6em}
+\newcommand{\KMMLogoY}{-0.6em}
+\newcommand{\KMMCornerAdjust}{%
+  \if\relax\detokenize{\insertframesubtitle}\relax
+    \renewcommand{\KMMLogoHeight}{0.75cm}
+    \renewcommand{\KMMLogoY}{-0.25em}
+  \else
+    \renewcommand{\KMMLogoHeight}{0.9cm}
+    \renewcommand{\KMMLogoY}{-0.6em}%
+  \fi
+}
+
+% ---- frametitle with corner logo that adapts to header height
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,dp=0.8ex,left]{frametitle}
+    \hspace*{0.6em}\insertframetitle%
+    \if\relax\detokenize{\insertframesubtitle}\relax\relax
+    \else\\[-0.2ex]
+      {\normalsize\color{KMMGrey}\hspace*{0.6em}\insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+  \KMMCornerAdjust
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east] at ($(current page.north east)+(\KMMLogoX,\KMMLogoY)$) {%
+      \IfFileExists{\KMMCornerLogo}{\includegraphics[height=\KMMLogoHeight]{\KMMCornerLogo}}{}%
+    };
+  \end{tikzpicture}%
+}
+
+% -- Elegant theorem boxes for Beamer
+\usepackage[most]{tcolorbox}
+
+% Definition box styled to your palette
+\newtcolorbox{ApBox}[1][]{%
+  enhanced, breakable,
+  colback=KMMBlue!4, colframe=KMMBlue, coltitle=white,
+  fonttitle=\bfseries, title filled, sharp corners,
+  attach boxed title to top left={xshift=0.6em, yshift*=-\tcboxedtitleheight/2},
+  boxed title style={colback=KMMBlue, colframe=KMMBlue, sharp corners},
+  left=1em, right=1em, top=0.8em, bottom=0.8em,
+  before skip=6pt, after skip=6pt,
+  title={Apibrėžimas},
+  #1
+}
+
+% Example box styled to your palette
+\newtcolorbox{PavBox}[1][]{%
+  enhanced, breakable,
+  colback=KMMGold!4, colframe=KMMGold, coltitle=white,
+  fonttitle=\bfseries, title filled, sharp corners,
+  attach boxed title to top left={xshift=0.6em, yshift*=-\tcboxedtitleheight/2},
+  boxed title style={colback=KMMGold, colframe=KMMGold, sharp corners},
+  left=1em, right=1em, top=0.8em, bottom=0.8em,
+  before skip=6pt, after skip=6pt,
+  title={Pavyzdys},
+  #1
+}
+
+% ---- custom title slide ----
+\newcommand{\KMMTitlePage}{%
+\begin{frame}[plain]
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[KMMBlue] (current page.north west)
+    rectangle ($(current page.south west)!0.5!(current page.south east)$);
+  \node[anchor=south west,white,font=\small]
+    at ($(current page.south west)+(0.8em,0.8em)$) {\insertdate\ \textbullet\ \insertauthor};
+\end{tikzpicture}
+
+\begin{columns}[onlytextwidth,totalwidth=\paperwidth]
+\begin{column}{0.5\paperwidth}
+\vspace*{4.5em}
+{\color{white}\LARGE\bfseries \inserttitle\par}
+\vspace{0.6em}
+{\color{white}\large \insertsubtitle\par}
+\end{column}
+
+\begin{column}{0.5\paperwidth}
+\vspace*{1em}
+\vfill
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=center] 
+at ($(current page.north east)+(-4cm,-4.5cm)$) {%
+\includegraphics[width=0.5\paperwidth]{\KMMTitleLogo}%
+};
+\end{tikzpicture}
+\vfill
+\end{column}
+\end{columns}
+\end{frame}%
+}
+
+% ---- theorem-like environments ----
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}
+\newtheorem{teig}{Teiginys}
+\theoremstyle{definition}
+\newtheorem{ap}{Apibrėžimas}
+\newtheorem{pav}{Pavyzdys}
+\newtheorem{uzd}{Uždavinys}
+\newtheorem{puzd}{Papildomas uždavinys}
+\theoremstyle{remark}
+\newtheorem{pas}{Pastaba}
+
+% ---- math helpers ----
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\lk}[1]{\glqq #1\grqq{}}
+\pgfmathdeclarefunction{cbrt}{1}{\pgfmathparse{#1>=0 ? (#1)^(1/3) : -((abs(#1))^(1/3))}}
+
+% ---- metadata ----
+\title{Presentation Title}
+\subtitle{Presentation Subtitle}
+\author{Author Name}
+\date{\today}

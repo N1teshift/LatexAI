@@ -1,0 +1,84 @@
+% Document Settings (Math Theory & Worksheets)
+\documentclass[a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[lithuanian]{babel}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{lmodern}
+\usepackage{textgreek}
+\usepackage[top=0.25cm, bottom=0.25cm, left=0.25cm, right=0.25cm, footskip=1cm, a4paper]{geometry}
+\usepackage{fncychap}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\usetikzlibrary{angles,quotes,calc}
+\usetikzlibrary{calc, decorations.pathmorphing}
+\usetikzlibrary{intersections}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows}
+
+\def\RPlus{\rule[0.165em]{.5em}{.165em}\hspace{-.33em}\rule[0em]{.165em}{.5em}\,}
+\graphicspath{{../../content/images/}{content/images/}}
+
+\makeatletter
+\renewcommand{\DOCH}{%                                     
+    \CNoV\thechapter \space \CNV\FmN{\@chapapp} \par\nobreak
+    \vskip 40\p@}
+\makeatother
+
+\renewcommand*{\proofname}{$\bigtriangleup$}
+\linespread{1.5}
+\numberwithin{table}{chapter}
+\numberwithin{figure}{chapter}
+\pagestyle{plain}
+
+\newtheorem{teorema}{teorema}
+\newtheorem{teorema1}{teorema}
+\theoremstyle{definition}
+\newtheorem{uzd}[teorema]{uždavinys}
+\newtheorem{puzd}[teorema]{papildomas uždavinys}
+\newtheorem{ap}[teorema]{apibrėžimas}
+\newtheorem{teig}[teorema]{teiginys}
+\newtheorem{pas}[teorema]{pastaba}
+\newtheorem{pav}[teorema]{pavyzdys}
+\newtheorem{sav}[teorema]{savybė}
+
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\I{\mathbb{I}}
+
+\newcommand{\lk}[1]{\glqq #1\grqq\,}
+
+\pgfmathdeclarefunction{cbrt}{1}{%
+  \pgfmathparse{#1>=0 ? (#1)^(1/3) : -((abs(#1))^(1/3))}%
+}
+\setcounter{chapter}{1}
+
+% Prevent word breaking
+\sloppy
+
+% Reset column rule for regular multicols (inner multicols)
+\setlength{\columnseprule}{0pt}
+
+% Command to reset column rule for inner multicols
+\newcommand{\resetcolumnrule}{%
+  \setlength{\columnseprule}{0pt}%
+}
+
+% Command for smart text boxes that break lines but not math
+\newcommand{\smartbox}[1]{%
+  \fbox{\parbox{0.85\columnwidth}{#1}}%
+}
